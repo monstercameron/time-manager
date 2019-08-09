@@ -59,6 +59,7 @@ hour.hasMany(employee)
 employee.belongsTo(hour)
 employee.hasMany(period)
 period.belongsTo(employee)
+period.belongsTo(day)
 /**
  * Test DB authentication
  */

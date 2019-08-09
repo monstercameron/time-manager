@@ -1,5 +1,7 @@
 /**
- * Token decoding middleware
+ * @author Earl Cameron
+ * @name IsAuthenticated
+ * @description Token decoding middleware
  */
 const isAuthenticated = async (req, res, next) => {
     try {
@@ -17,6 +19,9 @@ const isAuthenticated = async (req, res, next) => {
         })
     }
 }
+/**
+ * Exports
+ */
 module.exports = {
     isAuth: isAuthenticated
 }

@@ -10,7 +10,9 @@ const {
 } = require('../util/Token')
 const {
     Employer,
-    Employee
+    Employee,
+    Period,
+    Day
 } = require('../util/Database')
 const {
     create,
@@ -23,6 +25,10 @@ const {
     NoSelectedRoleError,
     IncorrectPasswordError
 } = require('../util/Error')
+const {
+    createDate,
+    getTimeNowInMilliSec
+} = require('../util/Date')
 const response = require('../util/Response')
 /**
  * API Handlers
@@ -309,7 +315,24 @@ const reset = async (req, res) => {
  */
 const clockIn = async (req, res) => {
     try {
-        res.send('pass')
+        const employee = await Employee.findOne({
+            where: {
+                id: req.body.id
+            }
+        })
+        const day = await Day.findOne({
+            where: {
+                date: createDate()
+            }
+        })
+        const period = await Period.build({
+            begin:getTimeNowInMilliSec()
+        })
+        employee.addPeriod(period)
+        
+
+        res.json({day,period})
+
     } catch (error) {
         response({
             message: `There was an error`,
