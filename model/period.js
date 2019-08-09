@@ -13,7 +13,7 @@ module.exports = (sequelize, type) => {
         },
         name:{
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         }
     })
 }
