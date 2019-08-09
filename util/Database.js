@@ -69,7 +69,16 @@ period.belongsTo(employee)
 //     })
 //     .catch(err => {
 //         console.error('Unable to connect to the database:', err);
-//     });
+//     })
+/**
+ * Sync tables
+ */
+// DB.sync({
+//     force: false
+// })
+// .then(() => {
+//     console.log(`Database & tables created!`)
+// })
 /**
  * Exports
  */

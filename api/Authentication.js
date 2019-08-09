@@ -1,14 +1,13 @@
+/**
+ * @author Earl Cameron
+ * @description Authentication API
+ */
 const router = require('express').Router()
+const {test,registerSwitch, login, reset, clockIn} = require('../handler/Authentication')
+const {isAuth} = require('../middleware/Token')
 module.exports = router
-    .get('/test', (req, res) => {
-        response({
-            message: 'Hello World!',
-            status: 200,
-            res: res
-        })
-    })
-    .get('/test/login', require('../handler/Authentication').test)
-    .post('/login', (req, res) => {})
-    .post('/register', (req, res) => {})
-    .post('/reset', (req, res) => {})
-    .post('/clockin', require('../middleware/Token').isAuth, (req, res) => {})
+    .get('/test/login', test)
+    .post('/register', registerSwitch)
+    .post('/login', login)
+    .post('/reset', reset)
+    .post('/clockin', isAuth, clockIn)
