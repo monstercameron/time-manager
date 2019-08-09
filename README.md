@@ -28,3 +28,33 @@ hour -> day
 hour => employee
 employee => period
 period -> employee
+
+routes:
+api:
+    auth:
+        login
+        register
+        reset
+        logout
+        clockin
+    schedule:
+        setSpecWeek
+    day:
+        getHours
+    hour:
+        getDay
+        getEmployees
+    employee:
+        create
+        read
+        update
+        delete
+        getPeriods
+    period:
+        create
+        read
+        update
+        delete
+        getDay
+
+

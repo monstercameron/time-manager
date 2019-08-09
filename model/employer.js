@@ -12,6 +12,22 @@ module.exports = (sequelize, type) => {
         last_name: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        email:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        hash:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        recover_question:{
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        recovery_hash:{
+            type: Sequelize.STRING,
+            allowNull: false
         }
     })
 }

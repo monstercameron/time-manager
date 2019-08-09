@@ -1,4 +1,4 @@
-const DB = require('../util/Database')
+const {DB} = require('../util/Database')
 const Seq = require('sequelize')
 const {
     Hour,
@@ -25,21 +25,21 @@ const employer = Employer(DB, Seq)
 const period = Period(DB, Seq)
 
 // Drop tables
-// period.destroy({where: {}})
-// employer.destroy({where: {}})
-// employee.destroy({where: {}})
-// day.destroy({where: {}})
-// hour.destroy({where:{}})
+period.destroy({where: {}})
+employer.destroy({where: {}})
+employee.destroy({where: {}})
+day.destroy({where: {}})
+hour.destroy({where:{}})
 
 //relationships
-day.hasMany(hour)
-hour.belongsTo(day)
+// day.hasMany(hour)
+// hour.belongsTo(day)
 
-hour.hasMany(employee)
-employee.belongsTo(hour)
+// hour.hasMany(employee)
+// employee.belongsTo(hour)
 
-employee.hasMany(period)
-period.belongsTo(employee)
+// employee.hasMany(period)
+// period.belongsTo(employee)
 
 DB.sync({
         force: false
