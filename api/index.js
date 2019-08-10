@@ -8,4 +8,5 @@ const {
 } = require('../middleware/Token')
 router.use('/auth', require('./Authentication'))
 router.use('/date', isAuth, require('./Date'))
+router.use('/employee', isAuth, require('./Employee'))
 module.exports = router
