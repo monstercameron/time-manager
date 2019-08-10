@@ -5,6 +5,31 @@
 /**
  * Dependencies
  */
+// const {
+//     range
+// } = require('../util/Helper')
+/**
+ * Manual range fn import
+ */
+const range = (a, b, step) => {
+    let A = [];
+    if (typeof a == 'number') {
+        A[0] = a;
+        step = step || 1;
+        while (a + step <= b) {
+            A[A.length] = a += step;
+        }
+    } else {
+        var s = 'abcdefghijklmnopqrstuvwxyz';
+        if (a === a.toUpperCase()) {
+            b = b.toUpperCase();
+            s = s.toUpperCase();
+        }
+        s = s.substring(s.indexOf(a), s.indexOf(b) + 1);
+        A = s.split('');
+    }
+    return A;
+}
 const {
     Employer,
     Employee,
@@ -30,11 +55,19 @@ const assign = async (req, res) => {
                 }
             })
             const hours = await day.getHours()
-            for (const hour of hours) {
-                if (hour.dataValues.id >= aDate.day.time_slots.begin && hour.dataValues.id <= aDate.day.time_slots.end) {
-                    hour.addEmployee(employee)
-                }
+            const {
+                begin,
+                end
+            } = aDate.day.time_slots
+            const aRange = range(begin, end)
+            for (const hour of aRange){
+                console.log(hour)
             }
+            // for (const hour of hours) {
+            //     if (aRange.includes(hour.id)) {
+            //         hour.addEmployee(employee)
+            //     }
+            // }
         }
         response({
             message: `yatta`,
@@ -57,10 +90,19 @@ const test = async (req, res) => {
             where: {
                 date: '8/12/2019'
             },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
             include: [{
                 model: Hour,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
                 include: {
-                    model: Employee
+                    model: Employee,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    }
                 }
             }]
         })
